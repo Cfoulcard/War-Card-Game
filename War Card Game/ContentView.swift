@@ -30,7 +30,6 @@ struct ContentView: View {
                     Image(playerCard).padding()
                     Image(cpuCard).padding()
                 }.padding()
-                
                 Button {
                     deal()
                 } label: {
@@ -68,16 +67,17 @@ struct ContentView: View {
     /** Randomize the cards */
     func deal() {
         playerCard = cards.randomElement() ?? "card2"
-        cpuCard = cards.randomElement() ?? "card3"
-        
-        if getNumericValue(from: playerCard) ?? 0 == getNumericValue(from: cpuCard) ?? 0 {
+        cpuCard = cards.randomElement() ?? "card2"
+
+        let playerCardValue = getNumericValue(from: playerCard) ?? 0
+        let cpuCardValue = getNumericValue(from: cpuCard) ?? 0
+
+        if playerCardValue == cpuCardValue {
             print("Draw")
-        } else if getNumericValue(from: playerCard) ?? 0 >= getNumericValue(from: cpuCard) ?? 0 {
-            playerScore = playerScore + 1
-        } else if getNumericValue(from: cpuCard) ?? 0 >= getNumericValue(from: playerCard) ?? 0 {
-            cpuScore = cpuScore + 1
+        } else if playerCardValue > cpuCardValue {
+            playerScore += 1
         } else {
-            print("Draw")
+            cpuScore += 1
         }
     }
     
